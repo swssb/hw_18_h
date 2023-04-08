@@ -30,23 +30,23 @@ def register_extensions(app):
     api.add_namespace(genre_ns)
     api.add_namespace(movie_ns)
     api.add_namespace(director_ns)
-    create_data(app, db)
+    # create_data(app, db)
 
-def create_data(app, db):
-    with app.app_context():
-        db.create_all()
-        m1 = Movie(id=1, title='Rising Sun', description='Nice sun',trailer='youtu.be/j2Hs2', year=2009,
-                   rating=5, genre_id=1, director_id=1)
-        m2 = Movie(id=2, title='Transpeople', description='Old republic of humans', trailer='youtu.be/Ulss2',
-                   year=2022, rating=6, genre_id=1, director_id=2)
-        m3 = Movie(id=3, title='Liquid Card', description='The card are going to hell', trailer='youtu.be/L5J0o',
-                   year=2017, rating=10, genre_id=2, director_id=1)
-        g1 = Genre(id=1, name='Drama')
-        g2 = Genre(id=2, name='Comedy')
-        d1 = Director(id=1, name='Grigoriy')
-        d2 = Director(id=2, name='Anatoliy')
-        with db.session.begin():
-            db.session.add_all([m1, m2, m3, g1, g2, d1, d2])
+# def create_data(app, db):
+#     with app.app_context():
+#         db.create_all()
+#         m1 = Movie(id=1, title='Rising Sun', description='Nice sun',trailer='youtu.be/j2Hs2', year=2009,
+#                    rating=5, genre_id=1, director_id=1)
+#         m2 = Movie(id=2, title='Transpeople', description='Old republic of humans', trailer='youtu.be/Ulss2',
+#                    year=2022, rating=6, genre_id=1, director_id=2)
+#         m3 = Movie(id=3, title='Liquid Card', description='The card are going to hell', trailer='youtu.be/L5J0o',
+#                    year=2017, rating=10, genre_id=2, director_id=1)
+#         g1 = Genre(id=1, name='Drama')
+#         g2 = Genre(id=2, name='Comedy')
+#         d1 = Director(id=1, name='Grigoriy')
+#         d2 = Director(id=2, name='Anatoliy')
+#         with db.session.begin():
+#             db.session.add_all([m1, m2, m3, g1, g2, d1, d2])
 
 app = create_app(Config())
 app.debug = True
