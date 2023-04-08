@@ -24,7 +24,17 @@ class MoviesService:
         return self.movies_dao.add_movie(data)
 
     def change_movie(self, data):
-        return self.movies_dao.change_movie(data)
+        id = data.get('id')
+        movie = self.movies_dao.get_one(id)
+        movie.name = data.get('name')
+        movie.title = data.get('title')
+        movie.description = data.get('description')
+        movie.trailer = data.get('trailer')
+        movie.year = data.get('year')
+        movie.rating = data.get('rating')
+        movie.genre_id = data.get('genre_id')
+        movie.director_id = data.get('director_id')
+        self.movies_dao.change_movie(movie)
 
     def delete_movie(self, id):
         return self.movies_dao.delete_movie(id)

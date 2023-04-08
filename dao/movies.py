@@ -31,26 +31,20 @@ class MoviesDAO:
         new_movie = Movie(**data)
         self.session.add(new_movie)
         self.session.commit()
+        self.session.close()
         return new_movie
 
 
-    def change_movie(self, data):
-        id = data.get('id')
-        movie = self.session.query(Movie).get(id)
-        movie.name = data.get('name')
-        movie.title = data.get('title')
-        movie.description = data.get('description')
-        movie.trailer = data.get('trailer')
-        movie.year = data.get('year')
-        movie.rating = data.get('rating')
-        movie.genre_id = data.get('genre_id')
-        movie.director_id = data.get('director_id')
+    def change_movie(self, movie):
+
         self.session.add(movie)
         self.session.commit()
+        self.session.close()
         return movie
 
     def delete_movie(self, id):
         movie = self.session.query(Movie).get(id)
         self.session.delete(movie)
         self.session.commit()
+        self.session.close()
         return movie

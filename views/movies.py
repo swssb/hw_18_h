@@ -1,5 +1,5 @@
 # здесь контроллеры/хендлеры/представления для обработки запросов (flask ручки). сюда импортируются сервисы из пакета service
-from flask import request
+from flask import request, jsonify
 from flask_restx import Resource, Namespace
 from dao.model.movie import Movie, MovieSchema
 from implemented import movies_service
@@ -22,11 +22,15 @@ class MoviesView(Resource):
         }
         movies = movies_service.get_all(filters)
         return MovieSchema(many=True).dump(movies), 200
-    
+
     def post(self):
         data = request.get_json()
+        movie_id = data.get('id')
+        response = jsonify()
+        response.status_code = 201
+        response.headers['Location'] = f'/{movie_id}'
         movie = movies_service.add_movie(data)
-        return "", 201
+        return response
 
 
 @movie_ns.route('/<int:id>')
