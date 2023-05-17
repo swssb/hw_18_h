@@ -4,6 +4,7 @@ services:
   api:
     build:
       context: .
+    image: swssb/hw_18
     ports:
       - 80:80
 
